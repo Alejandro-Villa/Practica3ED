@@ -23,7 +23,7 @@ unsigned ingredientes::size() const {
 	return datos.size();
 }
 
-unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) const {
+unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado) const {
 //	unsigned m=0, izq = 0, drcha = size()-1, pos=0;
 	encontrado = false;
 
@@ -69,9 +69,9 @@ unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) cons
 	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
 	
 	if (size() > 0) {
-		if (buscado.getNombre() < datos[0].getNombre())
+		if (buscado.getNombre() <= datos[0].getNombre())
 			lo=0;
-		else if (buscado.getNombre() > datos[size()-1].getNombre())
+		else if (buscado.getNombre() >= datos[size()-1].getNombre())
 			lo=size();
 		else {
 			while (lo < hi) {
@@ -93,18 +93,54 @@ unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) cons
 	return lo;
 }
 
+unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
+	unsigned lo=0, hi=(indice.size()>0)?(indice.size()-1):0, mid=0;
+
+	if (indice.size() > 0) {
+		if (buscado.getTipo() < datos[indice[0]].getTipo())
+			lo=0;
+		else if (buscado.getTipo() > datos[indice[indice.size()-1]].getTipo())
+			lo=indice.size();
+		else {
+			while (lo < hi) {
+				mid = (lo+hi)/2;
+				if (datos[indice[mid]].getTipo() > buscado.getTipo())
+					hi = mid;
+				else
+					lo = mid + 1;
+			}
+		}
+	}
+		return lo;
+}
+
 void ingredientes::insertar(const ingrediente& nuevo) {
 	bool esta = false;
-	unsigned pos = existe(nuevo, esta);
+	unsigned dpos = existeDatos(nuevo, esta);
 
 	if(!esta) {
 		datos.resize(size()+1);
-		for (unsigned i = size()-1; i > pos; --i)
+		for (unsigned i = size()-1; i > dpos; --i)
 			datos[i] = datos[i-1];
-		datos[pos] = nuevo;
+		datos[dpos] = nuevo;
+		
+		if(DEBUG)
+			cout << "DEBUG: insertado en posicion " << dpos << endl;
+
+		if(indice.size() > 0)
+			for (unsigned i=0; i < indice.size(); ++i) 
+				if (indice[i] >= dpos)
+					++indice[i];
+		unsigned ipos = existeIndice(nuevo);
+
+		indice.resize(indice.size()+1);
+		for (unsigned i=indice.size()-1; i > ipos; --i)
+			indice[i] = indice[i-1];
+		indice[ipos] = dpos;
+	
+		if(DEBUG)
+			cout << "DEBUG: insertado indice en " << ipos << endl;
 	}
-	if(DEBUG)
-		cout << "DEBUG: insertado en posicion " << pos << endl;
 
 //	int viejo_tam = size();
 //
@@ -119,7 +155,8 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
 	for (int i = 0; i < is.datos.size(); ++i) {
-		//out << endl << "DEBUG:Ingrediente " << i << ":" << endl;
+		if(DEBUG)
+			out << endl << "DEBUG:Ingrediente " << i << ":" << endl;
 		out << is.datos[i];
 	}
 	return out;
@@ -173,8 +210,11 @@ istream& operator>> (istream &in, ingredientes &is) {
 //}
 
 ostream& ingredientes::ImprimirPorTipo(ostream& out) const {
-	for (unsigned i=0; i < size(); ++i)
+	for (unsigned i=0; i < size(); ++i) {
+		if(DEBUG)
+			cout << "DEBUG: Ingrediente " << i << ':' << endl;
 		out << datos[indice[i]];
+	}
 	return out;
 }
 
@@ -252,3 +292,4 @@ void ingredientes::borrar(string nombre) {
 			indice.resize(indice.size()-1);
 		}
 }
+

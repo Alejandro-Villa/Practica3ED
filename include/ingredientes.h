@@ -25,7 +25,8 @@ class ingredientes {
 	private:
 		VD <ingrediente> datos;
 		VD <int> indice;
-		unsigned existe(const ingrediente& buscado, bool &encontrado) const;
+		unsigned existeDatos(const ingrediente& buscado, bool &encontrado) const;
+		unsigned existeIndice(const ingrediente& buscado) const;
 		//void Ordena();
 		//void OrdenaTipo();
 		//void OrdenaNombre();
