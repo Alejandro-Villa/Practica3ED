@@ -254,7 +254,7 @@ Carne Cordero, Magra;122;0;20;3;0;Carne
 Cerveza Negra;28;3;0;0;0;Bebida
 Levadura Cerveza, Seca;219;0;48;4;0;Especias-Condimento
 Pollo, Pechugas Kentucky;436;34;25;22;0;Procesado
-elon;24;5;1;0;1;Fruta
+Melon;24;5;1;0;1;Fruta
 Faneca;74;1;15;1;0;Pescado
 Higado Ternera;153;2;20;7;0;Carne
 Cordero Pierna;240;0;18;19;0;Carne
