@@ -22,7 +22,7 @@ unsigned ingredientes::size() const {
 }
 
 unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) const {
-	unsigned m, izq = 0, drcha = size()-1, pos=0;
+	unsigned m=0, izq = 0, drcha = size()-1, pos=0;
 	encontrado = false;
 
 /*	BUSQUEDA BINARIA: FALLA
