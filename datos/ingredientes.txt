@@ -56,13 +56,13 @@ Perejil;21;0;5;0;9;Verdura
 Lomo, Cerdo Embuchado;386;0;50;21;0;Carne
 Peras;41;11;0;0;2;Fruta
 Col;20;4;2;0;3;Verdura
-aiz, Dulce Mazorca;123;23;4;2;5;Cereal
+Maiz, Dulce Mazorca;123;23;4;2;5;Cereal
 Higado Cerdo;154;2;21;7;0;Carne
 Pan Con Chocolate;419;51;7;21;2;Procesado
 Caracol Terrestre;80;0;16;1;0;Molusco
-argarina Vegetal;746;0;0;80;0;Aceite
+Margarina Vegetal;746;0;0;80;0;Aceite
 Berenjenas;14;3;1;0;2;Verdura
-agdalena;397;42;6;23;1;Procesado
+Magdalena;397;42;6;23;1;Procesado
 Aceite Maiz;899;0;0;100;0;Aceite
 Uvas;61;16;1;0;0;Fruta
 Carne Cerdo, Grasa;329;0;16;30;0;Carne
@@ -96,8 +96,8 @@ Carne Cordero, Chuleta;386;0;15;36;0;Carne
 Galletas Media;436;74;7;14;5;Procesado
 Bacalao Salazon, remojado;138;0;32;1;0;Pescado
 Aceite Soja;899;0;0;100;0;Aceite
-anhattan Cocktail;164;8;0;0;0;Bebida
-ayonesa;718;0;2;79;0;Procesado
+Manhattan Cocktail;164;8;0;0;0;Bebida
+Mayonesa;718;0;2;79;0;Procesado
 Cafe Infusion;2;0;0;0;0;Bebida
 Nectarina;64;17.1;0.6;0;2;Fruta
 Chanquetes;79;2;11;3;0;Pescado
@@ -129,7 +129,7 @@ Arenque Seco;122;0;17;6;0;Pescado
 Frambuesas;25;6;1;0;7;Fruta
 Cigala;67;0;15;0.8;0;Crustaceo
 Huevo;147;1;12;11;0;Huevo
-argarina Industrial;746;0;0;80;0;Aceite
+Margarina Industrial;746;0;0;80;0;Aceite
 Caballa;223;0;19;16;0;Pescado
 Leche Desnatada, Polvo;374;53;35;1;0;Leche-Derivados
 Ginebra;222;0;0;0;0;Bebida
@@ -139,12 +139,12 @@ Datiles;279;71;2.2;0.4;8.7;Fruta
 Setas Colmenilla;9;0;2;0;7;Verdura
 Garbanzos;314;49;20;3;16;Legumbre
 Jurel;127;1;16;7;0;Pescado
-erluza;132;1;68;31;0;Pescado
+Merluza;132;1;68;31;0;Pescado
 Soja Germinada;13;1;2;0.1;2.3;Legumbre
 Paloma;106;0;22;2;0;Carne
 Queso Burgos;167;3;11;11;0;Leche-Derivados
 Langosta Cocida;119;0;22;3;0;Crustaceo
-artini;140;0;0;0;0;Bebida
+Martini;140;0;0;0;0;Bebida
 Carne Vaca, Guisar;176;0;20;11;0;Carne
 Queso Quark;167;3;11;11;0;Leche-Derivados
 Tarta Manzana Casera;282;43;2;12;0;Procesado
@@ -158,11 +158,11 @@ Faisan;160;0;24;6;0;Carne
 Remolacha Cocida;44;10;2;0;2;Verdura
 Arroz Blanco;361;87;6;1;2;Cereal
 Yogur Frutas;102;19;4;2;0;Leche-Derivados
-elocoton en almibar;84;22;0.4;0;1;Fruta
+Melocoton en almibar;84;22;0.4;0;1;Fruta
 Naranja;83;6;2;1;19;Fruta
 Queso Pirineos;355;0;22;30;0;Leche-Derivados
 Guisantes Enlatados;54;9;4;0;4;Verdura
-ejillones;66;0;12;2;0;Molusco
+Mejillones;66;0;12;2;0;Molusco
 Sidra;36;3;0;0;0;Bebida
 Pan Integral;216;42;9;3;8;Cereal
 Papaya;45;10.3;0.6;0.2;0.8;Fruta
@@ -287,7 +287,7 @@ Leche Vaca, U.H.T.;60;5;3;3;0;Leche-Derivados
 Castañas;170;37;2;3;7;Frutos Secos
 Vinagre De Vino;4;1;0;0;0;Especias-Condimento
 Salchichon;454;2;26;38;0;Carne
-andarinas;34;8;1;0;2;Fruta
+Mandarinas;34;8;1;0;2;Fruta
 Pistachos;602;13;21;52;6;Frutos Secos
 Trufas;25;0;6;0;17;Verdura
 Espinacas Cocidas;30;1;5;0;6;Verdura
@@ -322,7 +322,7 @@ Habas secas;343;59;23;1.5;4;Verdura
 Biscotes Trigo;366;73;9;4;0;Cereal
 Pepino;10;2;1;0;0;Verdura
 Crema Leche, Chantilly;331;10;2;31;0;Procesado
-acarrones;370;79;14;2;3;Cereal
+Macarrones;370;79;14;2;3;Cereal
 Gofio Trigo;371;82;11;2;0;Cereal
 Datiles Secos, Deshuesados;248;64;2;0;9;Frutos Secos
 Corazon Vacuno;108;0;19;4;0;Carne
@@ -336,7 +336,7 @@ Jamon Cocido;352;1;22;29;0;Carne
 Queso Gouda;346;0;25;27;0;Leche-Derivados
 Setas Cantharellus;11;0;2;0;6;Verdura
 Atun Fresco;242;0;22;16;0;Pescado
-embrillo;236;59;0;0;0;Fruta
+Membrillo;236;59;0;0;0;Fruta
 Pasta;373;82;13;2;0;Cereal
 Tonica Agua;42;10;0;0;0;Bebida
 Bacalao Seco;322;0;75;2.5;0;Pescado
@@ -348,7 +348,7 @@ Acelgas;13;1;2;0;6;Verdura
 Chicharrones;540;1;20;51;0;Carne
 Sal;0;0;0;0;0;Especias-Condimento
 Queso Gruyere;406;0;26;34;0;Leche-Derivados
-elocoton;37;9;1;0;2;Fruta
+Melocoton;37;9;1;0;2;Fruta
 Leche Vaca, Semidesnatada;49;5;3;2;0;Leche-Derivados
 Queso, Manchego Fresco;333;0;26;25;0;Leche-Derivados
 Azucar Blanca;394;100;0;0;0;Azucar
@@ -356,7 +356,7 @@ Percebes;59;0;14;0;0;Molusco
 Carne Cabrito;161;0;20;8;0;Carne
 Leche Entera, Polvo;500;37;25;26;0;Leche-Derivados
 Helado Fruta;140;29;2;2;0;Procesado
-iel;300;75;0.5;0.2;0;Azucar
+Miel;300;75;0.5;0.2;0;Azucar
 Salvado Trigo;206;27;14;6;44;Cereal
 Judia Verde;31;74;21;5;2.4;Verdura
 Jamon Serrano;195;1;59;40;0;Carne
