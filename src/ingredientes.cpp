@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#define DEBUG true
+
 using namespace std;
 
 ingredientes::ingredientes() {
@@ -63,7 +65,7 @@ unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) cons
 	}
 */
 
-	// BUSQUEDA BINARIA: Segundo intento, códdigo de SO.
+	// BUSQUEDA BINARIA: Segundo intento, códdigo de SO. FUNCIONA.
 	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
 	
 	if (size() > 0) {
@@ -84,15 +86,11 @@ unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) cons
 	}
 	else
 		lo=0;
-	
 
-	cout << "DEBUG: encontrado: " << encontrado << "\tPosición: " << lo << endl;
-	
+	if(DEBUG)
+		cout << "DEBUG: encontrado: " << encontrado << "\tPosición: " << lo << endl;
+
 	return lo;
-
-
-	
-	//return pos;
 }
 
 void ingredientes::insertar(const ingrediente& nuevo) {
@@ -105,8 +103,8 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 			datos[i] = datos[i-1];
 		datos[pos] = nuevo;
 	}
-
-	cout << "DEBUG: insertado en posicion " << pos << endl;
+	if(DEBUG)
+		cout << "DEBUG: insertado en posicion " << pos << endl;
 
 //	int viejo_tam = size();
 //
@@ -198,7 +196,8 @@ ingrediente ingredientes::get(string nombre) const {
 		if (datos[i].getNombre() == nombre) {
 			encontrado = true;
 			resultado = datos[i];
-			cout << "DEBUG:indice: " << i << endl;
+			if(DEBUG)
+				cout << "DEBUG:indice: " << i << endl;
 		}
 
 	return resultado;
@@ -225,9 +224,13 @@ void ingredientes::borrar(string nombre) {
 	bool encontrado = false;
 	unsigned pos; 
 
-	cout << "DEBUG:primer bucle" << endl;
+	if(DEBUG)
+		cout << "DEBUG:primer bucle" << endl;
+	
 	for (unsigned i=0; i < size() && !encontrado; ++i) {
-		cout << "DEBUG: iteracion: " << i << endl;
+		if(DEBUG)
+			cout << "DEBUG: iteracion: " << i << endl;
+		
 		if(datos[i].getNombre().compare(nombre) == 0) {
 			encontrado = true;
 			pos = i;
@@ -237,7 +240,9 @@ void ingredientes::borrar(string nombre) {
 		}
 	}
 	
-	cout << "DEBUG:segundo bucle" << endl;
+	if(DEBUG)	
+		cout << "DEBUG:segundo bucle" << endl;
+	
 	encontrado = false;
 	for (unsigned i=0; i < size() && !encontrado; ++i)
 		if(indice[i] == pos) {
