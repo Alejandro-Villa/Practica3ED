@@ -22,18 +22,19 @@ unsigned ingredientes::size() const {
 }
 
 unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) const {
-	unsigned m=0, izq = 0, drcha = size()-1, pos=0;
+//	unsigned m=0, izq = 0, drcha = size()-1, pos=0;
 	encontrado = false;
 
-/*	BUSQUEDA BINARIA: FALLA
+/*	BUSQUEDA BINARIA: FALLA */
+/*
 	if (size() > 0) {
  		if (buscado.getNombre() < datos[0].getNombre())
 			pos = 0;
 		else if (buscado.getNombre() > datos[drcha].getNombre())
 			pos = drcha;
 		else {
+			m=(izq+drcha)/2;
 			while (izq < drcha && !encontrado) {
-				m = (drcha+izq)/2;
 				if (buscado.getNombre() > datos[m].getNombre())
 					izq = m+1;
 				else if (buscado.getNombre() < datos[m].getNombre())
@@ -42,26 +43,56 @@ unsigned ingredientes::existe(const ingrediente& buscado, bool &encontrado) cons
 					pos = m;
 					encontrado = true;
 				}
+				m = (izq+drcha)/2;
 			}
 			while (!encontrado && datos[pos].getNombre() < buscado.getNombre()) {
 				++pos;
 			}
 		}
+
 	}
 	else
 		pos=0;
 */
-	
+/*
 	// BUSQUEDA SECUENCIAL: FUNCIONA
 	if(size() > 0) {
 		while(pos < (unsigned)(size()-1) && datos[pos].getNombre() < buscado.getNombre())
 			++pos;
 		encontrado = ((datos[pos].getNombre() == buscado.getNombre()) && (datos[pos].getTipo() == buscado.getTipo()));
 	}
+*/
 
-	cout << "DEBUG: encontrado: " << encontrado << "\tPosición: " << pos << endl;
+	// BUSQUEDA BINARIA: Segundo intento, códdigo de SO.
+	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
 	
-	return pos;
+	if (size() > 0) {
+		if (buscado.getNombre() < datos[0].getNombre())
+			lo=0;
+		else if (buscado.getNombre() > datos[size()-1].getNombre())
+			lo=size();
+		else {
+			while (lo < hi) {
+				mid = (lo+hi)/2;
+				if (datos[mid].getNombre() > buscado.getNombre())
+					hi = mid;
+				else
+					lo = mid + 1;
+			}
+			encontrado = (datos[lo-1].getNombre() == buscado.getNombre() && datos[lo-1].getTipo() == buscado.getTipo());
+		}
+	}
+	else
+		lo=0;
+	
+
+	cout << "DEBUG: encontrado: " << encontrado << "\tPosición: " << lo << endl;
+	
+	return lo;
+
+
+	
+	//return pos;
 }
 
 void ingredientes::insertar(const ingrediente& nuevo) {
@@ -90,7 +121,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
 	for (int i = 0; i < is.datos.size(); ++i) {
-		out << endl << "Ingrediente " << i << ":" << endl;
+		//out << endl << "DEBUG:Ingrediente " << i << ":" << endl;
 		out << is.datos[i];
 	}
 	return out;
