@@ -13,7 +13,7 @@ Harina Trigo, Panificada;337;75;11;1;3;Cereal
 Nuez Brasil;617;4;12;62;9;Frutos Secos
 Gofio Millo;377;83;6;5;0;Cereal
 Pavo;107;0;22;2;0;Carne
-antequilla;740;0;0;82;0;Aceite
+Mantequilla;740;0;0;82;0;Aceite
 Yogur Liquido;78;11;3;2;0;Leche-Derivados
 Cacao Polvo;357;11;20;24;38;Semillas
 Arenque Ahumado;205;0;26;11;0;Pescado
@@ -25,7 +25,7 @@ Coco;646;16;6;62;14;Fruta
 Chirimoya;178;0;19;11;0;Fruta
 Leche Vaca, Entera;60;5;3;3;0;Leche-Derivados
 Fresas;26;6;1;0;2;Fruta
-ango;57;12.45;0.6;0.47;1.7;Fruta
+Mango;57;12.45;0.6;0.47;1.7;Fruta
 Sesos Cordero;110;0;10;8;0;Carne
 Ancas Rana, De;68;0;16;0;0;Carne
 Pan Tostado, Blanco;297;65;10;2;3;Cereal
@@ -38,7 +38,7 @@ Cebolla;23;5;1;0;1;Verdura
 Rabo Vacuno;171;0;20;10;0;Carne
 Leche de Cabra;66;5;3;4;0;Leche-Derivados
 Leche, Condensada M.G. 7.50 %;137;10;6;8;0;Leche-Derivados
-azapan;443;49;9;25;6;Procesado
+Mazapan;443;49;9;25;6;Procesado
 Sesos Cerdo;132;0;11;9;0;Carne
 Limon;15;3;1;0;5;Fruta
 Coles Bruselas;26;3;4;0;4;Verdura
@@ -308,7 +308,7 @@ Crema chocolate con avellanas;549;60.5;6.2;33;1.2;Procesado
 Bacalao Fresco;76;0;17;1;0;Pescado
 Sardinas Con Tomate, Lata;177;0;18;12;0;Procesado
 Cereales Muesli;368;66;13;8;7;Cereal
-anzana;46;12;0;0;2;Fruta
+Manzana;46;12;0;0;2;Fruta
 Patatas Fritas;253;37;4;11;0;Verdura
 Harina Avena;401;73;12;9;7;Cereal
 Carne Conejo;124;0;22;4;0;Carne
@@ -326,7 +326,7 @@ Macarrones;370;79;14;2;3;Cereal
 Gofio Trigo;371;82;11;2;0;Cereal
 Datiles Secos, Deshuesados;248;64;2;0;9;Frutos Secos
 Corazon Vacuno;108;0;19;4;0;Carne
-anteca Cerdo;891;0;0;99;0;Aceite
+Manteca Cerdo;891;0;0;99;0;Aceite
 Acedias Fritas;256;12;17;16;0;Pescado
 Breca;74;1;15;1;0;Pescado
 Perrito-Caliente Con Mostaza;308;33;11;14;0;Procesado
