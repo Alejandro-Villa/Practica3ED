@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#define DEBUG true
+#define DEBUG false
 
 using namespace std;
 
@@ -76,12 +76,16 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 		else {
 			while (lo < hi) {
 				mid = (lo+hi)/2;
-				if (datos[mid].getNombre() > buscado.getNombre())
+				if (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() == buscado.getNombre()) {
+					lo = mid;
+					break;
+				}
+				else if (datos[mid].getNombre() > buscado.getNombre())
 					hi = mid;
 				else
 					lo = mid + 1;
 			}
-			encontrado = (datos[lo-1].getNombre() == buscado.getNombre() && datos[lo-1].getTipo() == buscado.getTipo());
+			encontrado = (lo==mid)?true:(datos[lo-1].getNombre() == buscado.getNombre() && datos[lo-1].getTipo() == buscado.getTipo());
 		}
 	}
 	else
@@ -104,7 +108,11 @@ unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 		else {
 			while (lo < hi) {
 				mid = (lo+hi)/2;
-				if (datos[indice[mid]].getTipo() > buscado.getTipo())
+				if (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() == buscado.getNombre()) {
+					lo = mid;
+					break;
+				}
+				else if (datos[indice[mid]].getTipo() > buscado.getTipo())
 					hi = mid;
 				else
 					lo = mid + 1;
@@ -212,7 +220,7 @@ istream& operator>> (istream &in, ingredientes &is) {
 ostream& ingredientes::ImprimirPorTipo(ostream& out) const {
 	for (unsigned i=0; i < size(); ++i) {
 		if(DEBUG)
-			cout << "DEBUG: Ingrediente " << i << ':' << endl;
+			cout << endl << "DEBUG: Ingrediente " << i << ':' << endl;
 		out << datos[indice[i]];
 	}
 	return out;
@@ -250,9 +258,11 @@ VD<string> ingredientes::getTipos() const {
 		string tipo = datos[i].getTipo();
 		unsigned j = 0;
 		bool repetido = false;
-		while(j < totalTipos.size() && !repetido) 
+		while(j < totalTipos.size() && !repetido) { 
 			if(totalTipos[j] == tipo)
 				repetido = true;
+			++j;
+		}
 		if(!repetido)
 			totalTipos.add(tipo);
 	}
@@ -261,6 +271,34 @@ VD<string> ingredientes::getTipos() const {
 }
 
 void ingredientes::borrar(string nombre) {
+	ingrediente borrado(get(nombre));
+	
+	if (borrado.getNombre() != "Undefined") {
+		bool encontrado = false;
+		unsigned dpos = existeDatos(borrado, encontrado);
+		
+		if(DEBUG)
+			cout << "DEBUG:Buscando índice" << endl;
+		
+		unsigned ipos = existeIndice(borrado);
+
+		for (unsigned i=dpos; i < (unsigned)(size()-1); ++i) 
+			datos[i] = datos[i+1];
+		datos.resize(size()-1);
+		
+		for (unsigned i=ipos; i < indice.size()-1; ++i)
+			indice[i]=indice[i+1];
+		indice.resize(indice.size()-1);
+
+		if(DEBUG)
+			cout << "DEBUG:Decrementando indices" << endl;
+
+		for (unsigned i=0; i < indice.size(); ++i)
+			if (indice[i] >= dpos)
+				--indice[i];
+	}
+	
+/* IMPLEMENTACION ANTIGUA.
 	bool encontrado = false;
 	unsigned pos; 
 
@@ -284,12 +322,12 @@ void ingredientes::borrar(string nombre) {
 		cout << "DEBUG:segundo bucle" << endl;
 	
 	encontrado = false;
-	for (unsigned i=0; i < size() && !encontrado; ++i)
+	for (unsigned i=0; i < indice.size() && !encontrado; ++i)
 		if(indice[i] == pos) {
 			encontrado = true;
 			for (unsigned j = i; j < size(); ++j)
 				indice[j] = indice[j+1];	
 			indice.resize(indice.size()-1);
 		}
+*/
 }
-
