@@ -1,5 +1,6 @@
 obj/*
 bin/*
-doc/*
+doc/latex
+doc/html
 html/*
 latex/*
