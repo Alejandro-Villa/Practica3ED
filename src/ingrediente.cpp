@@ -1,3 +1,8 @@
+/* 
+ * @file ingrediente.cpp
+ * @brief Implementación de la clase ingrediente.
+ */
+
 #include "ingrediente.h"
 #include<iostream>
 #include<string>
