@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#define DEBUG false
+#define DEBUG 0
 
 using namespace std;
 
@@ -16,7 +16,13 @@ ingredientes::ingredientes() {
 }
 
 ingredientes::ingredientes(const ingredientes& original) {
-	// TO DO
+	datos.resize(original.size());
+	indice.resize(original.size());
+	
+	for (unsigned i=0; i < size(); ++i){
+		datos[i] = original.datos[i];
+		indice[i] = original.indice[i];
+	}
 }
 
 unsigned ingredientes::size() const {
@@ -137,7 +143,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 
 		if(indice.size() > 0)
 			for (unsigned i=0; i < indice.size(); ++i) 
-				if (indice[i] >= dpos)
+				if ((unsigned)indice[i] >= dpos)
 					++indice[i];
 		unsigned ipos = existeIndice(nuevo);
 
@@ -162,7 +168,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 }
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
-	for (int i = 0; i < is.datos.size(); ++i) {
+	for (unsigned i = 0; i < is.datos.size(); ++i) {
 		if(DEBUG)
 			out << endl << "DEBUG:Ingrediente " << i << ":" << endl;
 		out << is.datos[i];
@@ -230,7 +236,7 @@ ingredientes ingredientes::getIngredienteTipo(string tipo) const {
 	ingredientes resultado;
 
 	for(unsigned i=0; i < size(); ++i)
-		if(datos[i].getTipo().compare(tipo) == 0)
+		if(datos[i].getTipo() == tipo)
 			resultado.insertar(datos[i]);
 
 	return resultado;
@@ -263,8 +269,11 @@ VD<string> ingredientes::getTipos() const {
 				repetido = true;
 			++j;
 		}
-		if(!repetido)
+		if(!repetido) {
+			if(DEBUG)
+				cout << "DEBUG:Añadiendo tipo " << tipo << endl;
 			totalTipos.add(tipo);
+		}
 	}
 
 	return totalTipos;
@@ -294,7 +303,7 @@ void ingredientes::borrar(string nombre) {
 			cout << "DEBUG:Decrementando indices" << endl;
 
 		for (unsigned i=0; i < indice.size(); ++i)
-			if (indice[i] >= dpos)
+			if ((unsigned)indice[i] >= dpos)
 				--indice[i];
 	}
 	
