@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#define DEBUG 0
+#define DEBUG 0 /// Directiva de prepocesamiento para mensajes de depuración.
 
 using namespace std;
 
@@ -30,50 +30,10 @@ unsigned ingredientes::size() const {
 }
 
 unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado) const {
-//	unsigned m=0, izq = 0, drcha = size()-1, pos=0;
 	encontrado = false;
-
-/*	BUSQUEDA BINARIA: FALLA */
-/*
-	if (size() > 0) {
- 		if (buscado.getNombre() < datos[0].getNombre())
-			pos = 0;
-		else if (buscado.getNombre() > datos[drcha].getNombre())
-			pos = drcha;
-		else {
-			m=(izq+drcha)/2;
-			while (izq < drcha && !encontrado) {
-				if (buscado.getNombre() > datos[m].getNombre())
-					izq = m+1;
-				else if (buscado.getNombre() < datos[m].getNombre())
-					drcha = m-1;
-				else if (buscado.getNombre() == datos[m].getNombre() && buscado.getTipo() == datos[m].getTipo()) {
-					pos = m;
-					encontrado = true;
-				}
-				m = (izq+drcha)/2;
-			}
-			while (!encontrado && datos[pos].getNombre() < buscado.getNombre()) {
-				++pos;
-			}
-		}
-
-	}
-	else
-		pos=0;
-*/
-/*
-	// BUSQUEDA SECUENCIAL: FUNCIONA
-	if(size() > 0) {
-		while(pos < (unsigned)(size()-1) && datos[pos].getNombre() < buscado.getNombre())
-			++pos;
-		encontrado = ((datos[pos].getNombre() == buscado.getNombre()) && (datos[pos].getTipo() == buscado.getTipo()));
-	}
-*/
-
-	// BUSQUEDA BINARIA: Segundo intento, códdigo de SO. FUNCIONA.
 	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
 	
+	/// Búsqueda binaria. Devuelve la mejor aproximación en el caso de que el elemento no exista.
 	if (size() > 0) {
 		if (buscado.getNombre() <= datos[0].getNombre())
 			lo=0;
@@ -106,6 +66,7 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 	unsigned lo=0, hi=(indice.size()>0)?(indice.size()-1):0, mid=0;
 
+	/// Búsqueda binaria con mejor aproximación.
 	if (indice.size() > 0) {
 		if (buscado.getTipo() < datos[indice[0]].getTipo())
 			lo=0;
@@ -132,6 +93,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 	bool esta = false;
 	unsigned dpos = existeDatos(nuevo, esta);
 
+	/// Si el ingrediente ya existe no insertamos nada.
 	if(!esta) {
 		datos.resize(size()+1);
 		for (unsigned i = size()-1; i > dpos; --i)
@@ -155,16 +117,6 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 		if(DEBUG)
 			cout << "DEBUG: insertado indice en " << ipos << endl;
 	}
-
-//	int viejo_tam = size();
-//
-//	datos.resize(viejo_tam+1);
-//	indice.resize(viejo_tam+1);
-//	
-//	datos[viejo_tam] = nuevo;
-//
-//	if(ordena) 
-//		Ordena();
 }
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
@@ -183,45 +135,9 @@ istream& operator>> (istream &in, ingredientes &is) {
 
 	while (in >> tmp)
 		is.insertar(tmp);
-//	is.Ordena();
 
 	return in;
 }
-
-//void ingredientes::Ordena() {
-//	// Ordenamos por nombre.
-//	OrdenaNombre();
-//	// y por tipo.
-//	OrdenaTipo();
-//}
-//
-//
-//void ingredientes::OrdenaNombre() {
-//	bool cambio = true;
-//	for (unsigned i=0; i < (unsigned)(size()-1) && cambio; ++i) {
-//		cambio=false;
-//		for (unsigned j=0; j < (unsigned)(size()-i-1); ++j) {
-//			if ((datos[j].getNombre().compare(datos[j+1].getNombre()))>0) {
-//				cambio=true;
-//				ingrediente aux(datos[j]);
-//				datos[j] = datos[j+1];
-//				datos[j+1] = aux;
-//			}
-//		}
-//	}
-//}
-//
-//void ingredientes::OrdenaTipo() {
-//	bool encontrado = false;
-//
-//	for (unsigned i=0; i < size(); ++i) 
-//		indice[i]=i;
-//
-//	for (unsigned i=0; i < size(); ++i) {
-//		cambio=false;
-//		for(unsigned j=0; j < size(); ++j) {
-//			if()
-//}
 
 ostream& ingredientes::ImprimirPorTipo(ostream& out) const {
 	for (unsigned i=0; i < size(); ++i) {
@@ -284,12 +200,12 @@ void ingredientes::borrar(string nombre) {
 	
 	if (borrado.getNombre() != "Undefined") {
 		bool encontrado = false;
-		unsigned dpos = existeDatos(borrado, encontrado);
+		unsigned dpos = existeDatos(borrado, encontrado); /// Usamos los mismos métodos de búsqueda que para insertar.
 		
 		if(DEBUG)
 			cout << "DEBUG:Buscando índice" << endl;
 		
-		unsigned ipos = existeIndice(borrado);
+		unsigned ipos = existeIndice(borrado); /// Mismo método que para insertar.
 
 		for (unsigned i=dpos; i < (unsigned)(size()-1); ++i) 
 			datos[i] = datos[i+1];
@@ -301,42 +217,10 @@ void ingredientes::borrar(string nombre) {
 
 		if(DEBUG)
 			cout << "DEBUG:Decrementando indices" << endl;
-
+		
+		/// Necesitamos decrementar el índice para que se adapte al cambio de tamaño en datos.
 		for (unsigned i=0; i < indice.size(); ++i)
 			if ((unsigned)indice[i] >= dpos)
 				--indice[i];
 	}
-	
-/* IMPLEMENTACION ANTIGUA.
-	bool encontrado = false;
-	unsigned pos; 
-
-	if(DEBUG)
-		cout << "DEBUG:primer bucle" << endl;
-	
-	for (unsigned i=0; i < size() && !encontrado; ++i) {
-		if(DEBUG)
-			cout << "DEBUG: iteracion: " << i << endl;
-		
-		if(datos[i].getNombre().compare(nombre) == 0) {
-			encontrado = true;
-			pos = i;
-			for (unsigned j = pos; j < (unsigned)(size()-1); ++j)
-				datos[j] = datos[j+1];
-			datos.resize(datos.size()-1);
-		}
-	}
-	
-	if(DEBUG)	
-		cout << "DEBUG:segundo bucle" << endl;
-	
-	encontrado = false;
-	for (unsigned i=0; i < indice.size() && !encontrado; ++i)
-		if(indice[i] == pos) {
-			encontrado = true;
-			for (unsigned j = i; j < size(); ++j)
-				indice[j] = indice[j+1];	
-			indice.resize(indice.size()-1);
-		}
-*/
 }

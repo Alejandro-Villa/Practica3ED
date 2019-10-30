@@ -16,7 +16,6 @@ class ingrediente {
 
 		ingrediente();
 		ingrediente(const ingrediente & otro);
-		//~Ingrediente();
 
 		ingrediente& operator= (const ingrediente& original);
 		friend std::ostream &operator<<( std::ostream & out, const ingrediente & I);

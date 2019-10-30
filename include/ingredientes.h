@@ -10,7 +10,6 @@ class ingredientes {
 	public:
 		ingredientes();
 		ingredientes(const ingredientes& original);
-		//~ingredientes();
 		
 		void insertar(const ingrediente& nuevo);
 		void borrar(std::string nombre);
@@ -27,9 +26,6 @@ class ingredientes {
 		VD <int> indice;
 		unsigned existeDatos(const ingrediente& buscado, bool &encontrado) const;
 		unsigned existeIndice(const ingrediente& buscado) const;
-		//void Ordena();
-		//void OrdenaTipo();
-		//void OrdenaNombre();
 };
 
 #endif
