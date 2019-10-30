@@ -11,10 +11,13 @@
 #include<iostream>
 
 /**
- * Clase Utilizada para representar un ingrediente.
+ * @brief Clase Utilizada para representar un ingrediente.
  *
  * Esta clase representa un ingrediente valiéndose de dos @c string y de cinco @c int que
- * representan el nombre, el tipo, y los macronutrientes del ingrediente. 
+ * representan el nombre, el tipo, y los macronutrientes del ingrediente, respectivamente. 
+ *
+ * Nótese que los miembros @a getter se han declarado como @a inline para mejorar la 
+ * eficiencia en memoria de esta clase.
  *
  * La restricción que se impone a esta clase es que los @c string tengan valores no nulos
  * y los @c int sean positivos @f$(>=0)@f$.
@@ -124,17 +127,39 @@ class ingrediente {
 		 *
 		 * Este operador está sobre todo pensado para usarlo con ficheros de texto plano,
 		 * no para interactuar con el usuario por pantalla. Se ha implementado usando @c 
-		 * getline con el delimitador @c ; tal y como se explica en @see operator<<
+		 * getline con el delimitador @c ; tal y como se explica en el otro operador de 
+		 * flujo. Para convertir las cadenas a @c double usamos @c atof() y @c c_str().
 		 */
 		friend std::istream& operator>>( std::istream & in, ingrediente & I);
 		
 	private:
+		/**
+		 * @brief Nombre del ingrediente.
+		 */
 		std::string nombre;
+		/**
+		 * @brief Tipo del ingrediente.
+		 */
 		std::string tipo;
+		/**
+		 * @brief Calorías por 100g de ingrediente.
+		 */
 		double calorias;
+		/**
+		 * @brief Hidratos de Carbono por 100g de ingrediente.
+		 */
 		double hc;
+		/**
+		 * @brief Proteínas por 100g de ingrdiente.
+		 */
 		double proteinas;
+		/**
+		 * @brief Grasas por 100g de ingrediente.
+		 */
 		double grasas;
+		/**
+		 * @brief Fibra por 100g de ingrediente.
+		 */
 		double fibra;
 };
 
