@@ -95,21 +95,22 @@ int main(int argc, char *argv[]) {
 
 	cout << "Estadística ___________________________________" << endl;
 	cout << "Tipo de Alimento " << tipo << endl;
-	cout << "Promedio +- Desviación" << endl;
+
+	cout << endl << "Promedio +- Desviación" << endl;
 	cout << "Calorías\tHidratos de Carb\tProteínas\tGrasas\tFibra" << endl;
 	
 	for (unsigned i=0; i < 5; ++i)
 		cout << medidas[i][0] << pm << medidas[i][1] << t;
 	cout << endl;
 
-	cout << "Máximos Valores" << endl;
+	cout << endl << "Máximos Valores" << endl;
 	cout << "Calorías (Alimento)\tHidratos de Carb (Alimento)\tProteínas (Alimento)\tGrasas (Alimento)\tFibra (Alimento)" << endl;
 
 	for (unsigned i=0; i < 5; ++i)
 		cout << medidas[i][3] << " ("<< tipo_pedido[medidas[i][2]].getNombre() << ")" << t;
 	cout << endl;
 
-	cout << "Mínimos Valores" << endl;
+	cout << endl << "Mínimos Valores" << endl;
 	cout << "Calorías (Alimento)\tHidratos de Carb (Alimento)\tProteínas (Alimento)\tGrasas (Alimento)\tFibra (Alimento)" << endl;
 
 	for (unsigned i=0; i < 5; ++i)
@@ -128,7 +129,7 @@ void MuestraParametros() {
 double media(const VD<double>& valores) {
 	double res=0;
 	
-	for (unsigned i=0; i < valores.size()-1; ++i)
+	for (unsigned i=0; i < valores.size(); ++i)
 		res+=valores[i];
 	res /= (double)valores.size();
 	
@@ -139,7 +140,7 @@ double desviacion(const VD<double>& valores) {
 	double m = media(valores);
 	VD<double> dist(valores);
 	
-	for (unsigned i=0; i < dist.size()-1; ++i)
+	for (unsigned i=0; i < dist.size(); ++i)
 		dist[i] = (dist[i]-m)*(dist[i]-m);
 	double var = media(dist);
 	
@@ -150,7 +151,7 @@ VD<double> maximo(const VD<double>& valores) {
 	double max=0;
 	unsigned pmax=0;
 	
-	for (unsigned i=0; i < valores.size()-1; ++i) 
+	for (unsigned i=0; i < valores.size(); ++i) 
 		if (valores[i] > max) {
 			max = valores[i];
 			pmax = i;
