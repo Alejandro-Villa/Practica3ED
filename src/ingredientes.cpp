@@ -11,6 +11,7 @@
  * @brief Directiva de preprocesamiento para depuración.
  *
  * Si esta macro está definida a @c 1 o @c true, se mostrarán mensajes de depuración por salida estándar.
+ *
  * Si está definida a @c 0 o @c false, no se mostrarán mensajes.
  */
 #define DEBUG 0
@@ -51,7 +52,8 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 		else {
 			while (lo < hi) {
 				mid = (lo+hi)/2;
-				if (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() == buscado.getNombre()) {
+				if (datos[mid].getTipo() == buscado.getTipo() && datos[mid].getNombre() == buscado.getNombre()) {
+					encontrado = true;
 					lo = mid;
 					break;
 				}
@@ -60,7 +62,6 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 				else
 					lo = mid + 1;
 			}
-			encontrado = (lo==mid)?true:(datos[lo-1].getNombre() == buscado.getNombre() && datos[lo-1].getTipo() == buscado.getTipo());
 		}
 	}
 	else
@@ -79,7 +80,7 @@ unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 	// Comprobamos que el tamaño es positivo.
 	if (indice.size() > 0) { 
 		// Comprobamos si el nuevo elemento se sale de los límites por abajo (menor que todo el vector.
-		if (buscado.getTipo() < datos[indice[0]].getTipo() || (buscado.getTipo() == datos[indice[0]].getTipo() && datos[indice[0]].getNombre() < buscado.getNombre()) ) 
+		if ( (buscado.getTipo() < datos[indice[0]].getTipo()) || (buscado.getTipo() == datos[indice[0]].getTipo() && buscado.getNombre() < datos[indice[0]].getNombre()) ) 
 			lo=0;
 		// Ídem pero si el elemento es mayor que todo el vector
 		else if ( (buscado.getTipo() > datos[indice[indice.size()-1]].getTipo()) || (buscado.getTipo() == datos[indice[indice.size()-1]].getTipo() && buscado.getNombre() > datos[indice[indice.size()-1]].getNombre()) ) 
@@ -109,6 +110,8 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 	bool esta = false;
 	unsigned dpos = existeDatos(nuevo, esta);
 
+	if(DEBUG)
+		cout << "DEBUG:insertando: " << nuevo << endl;
 	// Si el ingrediente ya existe no insertamos nada.
 	if(!esta) {
 		datos.resize(size()+1);
@@ -133,6 +136,8 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 		if(DEBUG)
 			cout << "DEBUG: insertado indice en " << ipos << endl;
 	}
+	else 
+		cout << "Ya está" << endl;
 }
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
@@ -149,8 +154,21 @@ istream& operator>> (istream &in, ingredientes &is) {
 	string linea;
 	getline(in, linea);
 
-	while (in >> tmp)
+	unsigned i=0;
+
+	while (!in.eof()) {
+		in >> tmp;
+		
+		if(DEBUG) {
+			cout << "DEBUG:Ingrediente a insertar " << tmp << endl;
+			++i;
+		}
+
 		is.insertar(tmp);
+	}
+
+	if(DEBUG)
+		cout << "DEBUG: Total insertados: " << i << endl;
 
 	return in;
 }
@@ -193,7 +211,7 @@ VD<string> ingredientes::getTipos() const {
 	VD<string> totalTipos;
 	
 	for (unsigned i=0; i < size(); ++i) {
-		string tipo = datos[i].getTipo();
+		string tipo = datos[indice[i]].getTipo();
 		unsigned j = 0;
 		bool repetido = false;
 		while(j < totalTipos.size() && !repetido) { 
