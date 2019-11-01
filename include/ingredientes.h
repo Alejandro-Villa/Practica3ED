@@ -74,6 +74,9 @@ class ingredientes {
 		ingrediente get(std::string nombre) const;
 		VD<std::string> getTipos() const;
 		ingredientes getIngredienteTipo(std::string tipo) const;
+		inline const ingrediente& operator[](const unsigned pos) const {return datos[pos];};
+		inline ingrediente& operator[](const unsigned pos) {return datos[pos];};
+
 
 		friend std::ostream& operator<< (std::ostream& out, const ingredientes& is);
 		friend std::istream& operator>> (std::istream& in, ingredientes& is);
