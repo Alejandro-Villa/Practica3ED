@@ -33,7 +33,7 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 	encontrado = false;
 	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
 	
-	/// Búsqueda binaria. Devuelve la mejor aproximación en el caso de que el elemento no exista.
+	// Búsqueda binaria. Devuelve la mejor aproximación en el caso de que el elemento no exista.
 	if (size() > 0) {
 		if (buscado.getNombre() <= datos[0].getNombre())
 			lo=0;
@@ -66,7 +66,7 @@ unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado)
 unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 	unsigned lo=0, hi=(indice.size()>0)?(indice.size()-1):0, mid=0;
 
-	/// Búsqueda binaria con mejor aproximación.
+	// Búsqueda binaria con mejor aproximación.
 	if (indice.size() > 0) {
 		if (buscado.getTipo() < datos[indice[0]].getTipo())
 			lo=0;
@@ -93,7 +93,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 	bool esta = false;
 	unsigned dpos = existeDatos(nuevo, esta);
 
-	/// Si el ingrediente ya existe no insertamos nada.
+	// Si el ingrediente ya existe no insertamos nada.
 	if(!esta) {
 		datos.resize(size()+1);
 		for (unsigned i = size()-1; i > dpos; --i)
@@ -200,12 +200,12 @@ void ingredientes::borrar(string nombre) {
 	
 	if (borrado.getNombre() != "Undefined") {
 		bool encontrado = false;
-		unsigned dpos = existeDatos(borrado, encontrado); /// Usamos los mismos métodos de búsqueda que para insertar.
+		unsigned dpos = existeDatos(borrado, encontrado); // Usamos los mismos métodos de búsqueda que para insertar.
 		
 		if(DEBUG)
 			cout << "DEBUG:Buscando índice" << endl;
 		
-		unsigned ipos = existeIndice(borrado); /// Mismo método que para insertar.
+		unsigned ipos = existeIndice(borrado); // Mismo método que para insertar.
 
 		for (unsigned i=dpos; i < (unsigned)(size()-1); ++i) 
 			datos[i] = datos[i+1];
@@ -218,7 +218,7 @@ void ingredientes::borrar(string nombre) {
 		if(DEBUG)
 			cout << "DEBUG:Decrementando indices" << endl;
 		
-		/// Necesitamos decrementar el índice para que se adapte al cambio de tamaño en datos.
+		// Necesitamos decrementar el índice para que se adapte al cambio de tamaño en datos.
 		for (unsigned i=0; i < indice.size(); ++i)
 			if ((unsigned)indice[i] >= dpos)
 				--indice[i];
