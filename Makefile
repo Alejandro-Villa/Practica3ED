@@ -31,4 +31,4 @@ clean :
 	-rm $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
 
 mrproper : clean
-	-rm $(BIN)/* doc/html/*
+	-rm -r $(BIN)/* doc/html/ doc/latex/
