@@ -1,6 +1,0 @@
-Alimento (100 gramos);Calorias (Kcal.);Hidratos de Carb.;Proteinas;Grasas;Fibra;Tipo
-Ketchup;98;24;2;0;0;Procesado
-Aceitunas;0;0;0;0;0;Fruta
-Gambas;0;0;0;0;0;Marisco
-Salmon;182;0;18;12;0;Pescado
-Gambas;0;0;0;0;0;Marisco
