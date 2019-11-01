@@ -1,10 +1,19 @@
+/**
+ * @file ingredientes.cpp
+ * @brief Archivo fuente de la clase ingredientes.
+ */
 #include "VD.h"
 #include "ingredientes.h"
 #include "ingrediente.h"
 #include <iostream>
 #include <string>
-
-#define DEBUG 0 /// Directiva de prepocesamiento para mensajes de depuración.
+/**
+ * @brief Directiva de preprocesamiento para depuración.
+ *
+ * Si esta macro está definida a @c 1 o @c true, se mostrarán mensajes de depuración por salida estándar.
+ * Si está definida a @c 0 o @c false, no se mostrarán mensajes.
+ */
+#define DEBUG 0
 
 using namespace std;
 
@@ -67,26 +76,33 @@ unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 	unsigned lo=0, hi=(indice.size()>0)?(indice.size()-1):0, mid=0;
 
 	// Búsqueda binaria con mejor aproximación.
-	if (indice.size() > 0) {
-		if (buscado.getTipo() < datos[indice[0]].getTipo())
+	// Comprobamos que el tamaño es positivo.
+	if (indice.size() > 0) { 
+		// Comprobamos si el nuevo elemento se sale de los límites por abajo (menor que todo el vector.
+		if (buscado.getTipo() < datos[indice[0]].getTipo() || (buscado.getTipo() == datos[indice[0]].getTipo() && datos[indice[0]].getNombre() < buscado.getNombre()) ) 
 			lo=0;
-		else if (buscado.getTipo() > datos[indice[indice.size()-1]].getTipo())
+		// Ídem pero si el elemento es mayor que todo el vector
+		else if ( (buscado.getTipo() > datos[indice[indice.size()-1]].getTipo()) || (buscado.getTipo() == datos[indice[indice.size()-1]].getTipo() && buscado.getNombre() > datos[indice[indice.size()-1]].getNombre()) ) 
 			lo=indice.size();
-		else {
-			while (lo < hi) {
+		// En este caso el elemento debe insertarse en algún punto intermedio del vector. Usamos búsqueda binaria.
+		else { 
+			while (lo < hi) { 
 				mid = (lo+hi)/2;
-				if (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() == buscado.getNombre()) {
+				// El elemento ha sido encontrado.
+				if (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() == buscado.getNombre()) { 
 					lo = mid;
-					break;
+					break; // Finalizamos el bucle.
 				}
-				else if (datos[indice[mid]].getTipo() > buscado.getTipo())
+				// El elemento está en la mitad inferior del vector.
+				else if ( (datos[indice[mid]].getTipo() > buscado.getTipo()) || (datos[indice[mid]].getTipo() == buscado.getTipo() && datos[indice[mid]].getNombre() > buscado.getNombre()) ) 
 					hi = mid;
-				else
+				// El elemento está en la mitad superior del vector.
+				else 
 					lo = mid + 1;
 			}
 		}
 	}
-		return lo;
+		return lo; // Devolvemos la posición donde lo encontramos.
 }
 
 void ingredientes::insertar(const ingrediente& nuevo) {
