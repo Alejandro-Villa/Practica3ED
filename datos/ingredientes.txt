@@ -369,4 +369,4 @@ Pimienta;0;0;0;0;0;Especias-Condimento
 Oregano;0;0;0;0;0;Especias-Condimento
 Canela;0;0;0;0;0;Especias-Condimento
 Cuscus;176;85;14;1;2.2;Cereal
-Estevia;0;0;0;0;0;Suplemento
+Estevia;0;0;0;0;0;Azucar
