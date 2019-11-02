@@ -1,3 +1,8 @@
+/**
+ * @file VD.cpp
+ * @brief Implementación de la clase @c VD.
+ */
+
 template <class T>
 VD<T>::VD(int n) {
 	if(n >= 0) { 
