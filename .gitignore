@@ -4,3 +4,4 @@ doc/latex
 doc/html
 html/*
 latex/*
+*.tgz
