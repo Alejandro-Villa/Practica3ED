@@ -1,8 +1,8 @@
 template <class T>
 VD<T>::VD(int n) {
-	if(n >= 0) {
-		nelementos=n;
-		datos = new T[n];
+	if(n >= 0) { 
+		datos = (n==0)?nullptr:new T[n];
+		nelementos = n;
 	}
 	else {
 		std::cerr << "El número de elementos debe ser positivo" << std::endl;
@@ -12,9 +12,9 @@ VD<T>::VD(int n) {
 
 template <class T>
 VD<T>::VD(const VD& original) {
-	nelementos = original.nelementos;
-	if (nelementos > 0) {
-		datos = new T[nelementos];
+	nelementos=0;
+	if (original.nelementos > 0) {
+		resize(original.nelementos);
 		for (int i = 0; i  < original.nelementos; ++i)
 			datos[i] = original.datos[i];
 	}
@@ -24,8 +24,10 @@ VD<T>::VD(const VD& original) {
 
 template <class T>
 VD<T>::~VD() {
-	if (nelementos>0)
+	if (datos != nullptr) {
 		delete [] datos;
+		datos = nullptr;
+	}
 }
 
 template <class T>
@@ -69,9 +71,10 @@ void VD<T>::resize(int n) {
 				datos = nuevos_datos;
 			}
 			else {
-				if (nelementos > 0)
+				if (datos != nullptr) {
 					delete [] datos;
-				datos = nullptr;
+					datos = nullptr;
+				}
 				nelementos = 0;
 			}		
 		}

@@ -168,7 +168,8 @@ VD<double> minimo(const VD<double>& valores) {
 	double min;
 	unsigned pmin;
 
-	min = valores[1];
+	min = valores[0];
+	pmin = 0;
 	for (unsigned i=0; i < valores.size(); ++i)
 		if (valores[i] < min) {
 			min = valores[i];
