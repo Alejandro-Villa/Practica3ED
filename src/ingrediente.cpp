@@ -1,6 +1,6 @@
-/* 
+/**
  * @file ingrediente.cpp
- * @brief Implementación de la clase ingrediente.
+ * @brief Implementación de la clase ingrediente::ingrediente.
  */
 
 #include "ingrediente.h"
@@ -8,6 +8,70 @@
 #include<string>
 
 using namespace std;
+
+
+void ingrediente::setNombre(const std::string& n){
+	if(n!="")
+		nombre = n;
+	else {
+		cerr << "ERROR: Nombre inválido" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setCalorias(const double& c){
+    if(c >= 0)
+		calorias = c;
+	else {
+		cerr << "ERROR: Calorías inválidas" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setHC(const double& nhc){
+	if(nhc >= 0)
+		hc = nhc;
+	else {
+		cerr << "ERROR: Hidratos carb. inválidos" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setProteinas(const double& p){
+    if(p >= 0)
+		proteinas = p;
+	else {
+		cerr << "ERROR: Proteínas inválidas" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setGrasa(const double& g){
+	if(g >= 0)
+		grasas = g;
+	else {
+		cerr << "ERROR: Grasas inválidas" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setFibra(const double& f){
+	if(f >= 0)
+		fibra = f;
+	else {
+		cerr << "ERROR: fibra inválida" << endl;
+		exit(1);
+	}
+}
+
+void ingrediente::setTipo(const std::string& ntipo){
+    if( ntipo != "")
+		tipo = ntipo;
+	else {
+		cerr << "ERROR: tipo inválido" << endl;
+		exit(1);
+	}
+}
 
 ingrediente::ingrediente() {
 	nombre="Undefined";

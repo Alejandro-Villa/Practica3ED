@@ -1,6 +1,6 @@
 /**
  * @file ingrediente.h
- * @brief Cabecera de la clase ingrediente.
+ * @brief Cabecera de la clase @c ingrediente::ingrediente.
  *
  * Esta clase se utiliza para guardar la información sobre un ingrediente de cocina.
  */
@@ -13,14 +13,16 @@
 /**
  * @brief Clase Utilizada para representar un ingrediente.
  *
- * Esta clase representa un ingrediente valiéndose de dos @c string y de cinco @c int que
- * representan el nombre, el tipo, y los macronutrientes del ingrediente, respectivamente. 
+ * Esta clase representa un ingrediente valiéndose de dos @c string y de cinco @c double
+ * que representan el nombre, el tipo, y los macronutrientes del ingrediente,
+ * respectivamente. 
  *
  * Nótese que los miembros @a getter se han declarado como @a inline para mejorar la 
- * eficiencia en memoria de esta clase.
+ * eficiencia en memoria de esta clase. También se destaca que los @a setters incluyen un 
+ * control básico de los parámetros, abortando si son inválidos.
  *
  * La restricción que se impone a esta clase es que los @c string tengan valores no nulos
- * y los @c int sean positivos @f$(>=0)@f$.
+ * y los @c double sean positivos @f$(>=0)@f$.
  */
 class ingrediente {
 	public:
@@ -65,6 +67,41 @@ class ingrediente {
 		 * @retval double La fibra por 100g de ingrediente.
 		 */
 		inline double getFibra() const { return fibra; };
+		/**
+	     * @brief Modifica el nombre del ingrediente.
+	     * @param "const std::string& n" El nuevo nombre. 
+	     */    
+	    void setNombre(const std::string& n);
+	    /**
+	     * @brief Modifica la cantidad calorías por cada 100 gramos del ingrediente.
+	     * @param "const double& c" La nueva cantidad de calorías por cada 100 gramos.
+	     */
+	    void setCalorias(const double& c);
+	    /**
+	     * @brief Modifica la cantidad de hidratos de carbono por cada 100 gramos del ingrediente.
+	     * @param "const double& hc" La nueva cantidad de hidratos de carbono por cada 100 gramos.
+	     */
+	    void setHC(const double& hc);
+	    /**
+	     * @brief Modifica la cantidad de proteinas por cada 100 gramos del ingrediente.
+	     * @param "const double& p" La nueva cantidad de proteinas por cada 100 gramos.
+	     */
+	    void setProteinas(const double& p);
+	    /**
+	     * @brief Modifica la cantidad de grasas por cada 100 gramos del ingrediente.
+	     * @param "const double& g" La nueva cantidad de grasas por cada 100 gramos.
+	     */
+	    void setGrasa(const double& g);
+	    /**
+	     * @brief Modifica la cantidad de fibra por cada 100 gramos del ingrediente.
+	     * @param "const double& f" La nueva cantidad de fibra por cada 100 gramos.
+	     */
+	    void setFibra(const double& f);
+	    /**
+	     * @brief Modifica el tipo del ingrediente.
+	     * @param "const std::string& tipo" El nuevo tipo.
+	     */
+	    void setTipo(const std::string& tipo);
 		/**
 		 * @brief Constructor por defecto. 
 		 *
