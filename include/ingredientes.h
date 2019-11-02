@@ -160,13 +160,13 @@ class ingredientes {
 		 * convención:
 		 *
 		 * 1. Se descarta la primera línea (hasta @c "\n"), considerada marca de formato.
-		 * 2. Se comprueba si se ha alcanzado el fin de archivo (@c std::eof()).
+		 * 2. Se comprueba si se ha alcanzado el fin del flujo. (@c std::eof()).
 		 * 3. Se lee un ingrediente con @c ingrediente::operator>>.
 		 * 4. Se inserta el ingrediente con @c insertar().
 		 * 5. Se vuelve al paso 2.
 		 *
-		 * Una vez concluido el proceso, toda la información se debe encontrar en el objeto
-		 * ingredientes @a is.
+		 * Una vez concluido el proceso, toda la información se debe encontrar en el
+		 * objeto ingredientes @a is.
 		 *
 		 * @param "std::istream& in" Flujo de entrada.
 		 * @param "ingredientes& is" Objeto donde se almacenará la información.
@@ -196,7 +196,33 @@ class ingredientes {
 		 * por nombre.
 		 */
 		VD <int> indice;
+		/**
+		 * @brief Método para hallar la posición de un ingrediente en @a datos.
+		 *
+		 * Este método busca, empleando el algoritmo de búsqueda binaria, un ingrediente 
+		 * en el vector @a datos, en el caso de que no se encuentre, devuelve la posición
+		 * dónde debería estar según orden alfabético de nombres. La información sobre si 
+		 * ha sido encontrado o no se registra en la variable @a encontrado.
+		 *
+		 * @param "const ingrediente& buscado" El ingrediente que se buscará.
+		 * @param "bool &encontrado" La variable que indica si se ha encontrado.
+		 * @post @a encontrado será @c true si se ha encontrado el ingrediente, de lo contrario
+		 * será @c false.
+		 * @retval unsigned Posición del ingrediente, o la que debería tener. 
+		 */
 		unsigned existeDatos(const ingrediente& buscado, bool &encontrado) const;
+		/**
+		 * @brief Método para hallar la posición de un ingrediente en @a indice.
+		 *
+		 * Este método busca, empleando el algoritmo de búsqueda binaria, la posición de 
+		 * un ingrediente en @a indice, o de no encontrarse, la posición donde estaría 
+		 * atendiendo al orden alfabético de tipo, o a igualdad de tipo, atendiendo al 
+		 * nombre. No se devuelve información sobre si el elemento se encontró, pues
+		 * para ello se emplea el método @c existeDatos() o @c get().
+		 *
+		 * @param "const ingrediente& buscado" Ingrediente a encontrar.
+		 * @retval unsigned Posición donde se encuentra o donde debería.
+		 */
 		unsigned existeIndice(const ingrediente& buscado) const;
 };
 
