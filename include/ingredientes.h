@@ -1,3 +1,9 @@
+/**
+ * @file ingredientes.h
+ *
+ * @brief Archivo cabecera de la clase @c ingredientes::ingredientes
+ */
+
 #ifndef INGREDIENTES
 #define INGREDIENTES
 
@@ -11,16 +17,14 @@
  * Esta clase representa un conjunto de ingredientes valiéndose de dos vectores dinámicos
  * de la clase @c VD. Los ingredientes se mantienen ordenados por nombre y por 
  * tipo, usando para la ordenación por tipo un vector de índices que apunta al vector de 
- * ingrediente. @see VD.h
- *
+ * ingrediente. @see VD
  */
 class ingredientes {
 	public:
 		/**
 		 * @brief Constructor por defecto.
 		 *
-		 * Para asegurarnos de que los vectores se han inicializado a cero, llamamos al 
-		 * método @c VD::resize() con argumento @c 0.
+		 * Utiliza los constructores que provee @c VD para inicializar los datos miembro.
 		 */
 		ingredientes();
 		/**
@@ -122,7 +126,7 @@ class ingredientes {
 		 * está implementado como inline para mejorar el rendimiento, ya que se prevee 
 		 * que será llamado muchas veces.
 		 *
-		 * @precond @a pos debe ser un índice válido, esto es, positivo y menor que 
+		 * @pre @a pos debe ser un índice válido, esto es, positivo y menor que 
 		 * @c size().
 		 * @param "unsigned pos" La posición a la que se va a acceder.
 		 * @retval "const ingrediente& " Ingrediente en la posición @a pos.

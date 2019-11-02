@@ -1,6 +1,6 @@
 /**
  * @file ingredientes.cpp
- * @brief Archivo fuente de la clase ingredientes.
+ * @brief Implementación de la clase @c ingredientes::ingredientes.
  */
 #include "VD.h"
 #include "ingredientes.h"
@@ -20,9 +20,6 @@ using namespace std;
 
 ingredientes::ingredientes() {
 	// No es necesario, pues el constructor de VD ya asigna el puntero a nullptr. 
-	// Lo hacemos aún así para asegurar consistencia.
-//	datos.resize(0);
-//	indice.resize(0);
 }
 
 ingredientes::ingredientes(const ingredientes& original) {
