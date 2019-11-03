@@ -54,7 +54,6 @@ double media(const VD<double>& valores);
  * @param "const VD<double>& valores" Vector de datos sobre el que se calcula la
  * desviación típica.
  * @retval double La desviación típica de los elementos de @a valores.
- * @todo Probar caso valores=0.
  */
 double desviacion(const VD<double>& valores);
 /**
