@@ -81,7 +81,7 @@ class ingrediente {
 	     * @brief Modifica la cantidad de hidratos de carbono por cada 100 gramos del ingrediente.
 	     * @param "const double& hc" La nueva cantidad de hidratos de carbono por cada 100 gramos.
 	     */
-	    void setHC(const double& hc);
+	    void setHc(const double& hc);
 	    /**
 	     * @brief Modifica la cantidad de proteinas por cada 100 gramos del ingrediente.
 	     * @param "const double& p" La nueva cantidad de proteinas por cada 100 gramos.
@@ -91,7 +91,7 @@ class ingrediente {
 	     * @brief Modifica la cantidad de grasas por cada 100 gramos del ingrediente.
 	     * @param "const double& g" La nueva cantidad de grasas por cada 100 gramos.
 	     */
-	    void setGrasa(const double& g);
+	    void setGrasas(const double& g);
 	    /**
 	     * @brief Modifica la cantidad de fibra por cada 100 gramos del ingrediente.
 	     * @param "const double& f" La nueva cantidad de fibra por cada 100 gramos.

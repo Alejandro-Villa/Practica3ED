@@ -28,7 +28,7 @@ void ingrediente::setCalorias(const double& c){
 	}
 }
 
-void ingrediente::setHC(const double& nhc){
+void ingrediente::setHc(const double& nhc){
 	if(nhc >= 0)
 		hc = nhc;
 	else {
@@ -46,7 +46,7 @@ void ingrediente::setProteinas(const double& p){
 	}
 }
 
-void ingrediente::setGrasa(const double& g){
+void ingrediente::setGrasas(const double& g){
 	if(g >= 0)
 		grasas = g;
 	else {
@@ -104,19 +104,19 @@ istream &operator>>( istream &in, ingrediente& I) {
 	string tmp;
 
 	getline(in ,tmp, ';');
-	I.nombre=tmp;
+	I.setNombre(tmp);
 	getline(in ,tmp, ';');
-	I.calorias=atof(tmp.c_str());
+	I.setCalorias(atof(tmp.c_str()));
 	getline(in ,tmp, ';');
-	I.hc=atof(tmp.c_str());
+	I.setHc(atof(tmp.c_str()));
 	getline(in ,tmp, ';');
-	I.proteinas=atof(tmp.c_str());
+	I.setProteinas(atof(tmp.c_str()));
 	getline(in ,tmp, ';');
-	I.grasas=atof(tmp.c_str());
+	I.setGrasas(atof(tmp.c_str()));
 	getline(in ,tmp, ';');
-	I.fibra=atof(tmp.c_str());
+	I.setFibra(atof(tmp.c_str()));
 	getline(in ,tmp);
-	I.tipo=tmp;
+	I.setTipo(tmp);
 
 	return in;
 }
