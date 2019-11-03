@@ -164,7 +164,7 @@ class ingredientes {
 		 * convención:
 		 *
 		 * 1. Se descarta la primera línea (hasta @c "\n"), considerada marca de formato.
-		 * 2. Se comprueba si se ha alcanzado el fin del flujo. (@c std::eof()).
+		 * 2. Se comprueba si se ha alcanzado el fin del flujo. (@c std::EOF).
 		 * 3. Se lee un ingrediente con @c ingrediente::operator>>.
 		 * 4. Se inserta el ingrediente con @c insertar().
 		 * 5. Se vuelve al paso 2.
