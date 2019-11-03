@@ -50,4 +50,4 @@ entrega: all mrproper
 	tar -czvf practica2.tgz \
 		--exclude-vcs --exclude-vcs-ignores --exclude='datos/*' \
 		--exclude='README.md' --exclude='practica2.tgz' \
-		../practica2 
+		$(PWD) 
