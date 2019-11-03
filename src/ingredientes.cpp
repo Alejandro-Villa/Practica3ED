@@ -153,14 +153,12 @@ istream& operator>> (istream &in, ingredientes &is) {
 
 	unsigned i=0;
 
-	while (!in.eof()) {
+	while (in.peek() != EOF && in.good()) {
 		in >> tmp;
-		
 		if(DEBUG) {
 			cout << "DEBUG:Ingrediente a insertar " << tmp << endl;
-			++i;
 		}
-
+		++i;
 		is.insertar(tmp);
 	}
 
