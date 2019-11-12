@@ -18,7 +18,6 @@ int main(int argc, char *argv[])
  //SECTION 1: Test sobre la lectura de un ingrediente
  //Ingrediente debe tener operadores de consulta y de modificacion por cada parametros
  //ademas de sobrecarga de lectura y escritura
- 
  string nf =argv[1];
  ifstream f(nf);
  if (!f){
@@ -47,7 +46,6 @@ int main(int argc, char *argv[])
  //SECTION 2: Test sobre el objeto Ingredientes. En primer lugar comprobamos que la sobrecarga de entrada/salida
  //esta bien. Y por lo tanto la operación de insertar
  //Ponemos el puntero del fichero al principio
- 
  f.seekg(0);
  ingredientes all_ingre;
  cout<<"Lectura de todos los ingredientes"<<endl;
@@ -55,18 +53,18 @@ int main(int argc, char *argv[])
 
  //Comprobamos que hemos hecho bien la lectura
  cout<<"Los ingredientes ordenados por nombre..."<<endl<<endl;
- cout<<all_ingre<<endl;
+ cout<<all_ingre<<endl;;
  cout<<"Pulse una tecla para continuar..."<<endl<<endl;
  cin.get();
  /******************************************************************************************/
  //Section 3: Sobre ingredientes comprobamos  que la indexacion por tipo funciona
- 
- cout<<"Imprimos por tipo "<<endl;
- all_ingre.ImprimirPorTipo(cout);
   
- cout<<endl<<"Pulse una tecla para continuar..."<<endl<<endl;
- cin.get();
- 
+  cout<<"Imprimos por tipo "<<endl;
+  all_ingre.ImprimirPorTipo(cout);
+  
+  cout<<endl<<"Pulse una tecla para continuar..."<<endl<<endl;
+  cin.get();
+  
  /******************************************************************************************/
  //SECTION 4: Sobre ingredientes comprobamos consultar por nombre, size y borrar
   cout<<endl<<endl;
@@ -98,7 +96,7 @@ int main(int argc, char *argv[])
   cin.get();
   /******************************************************************************************/
   //SECTION 5: Obtiene los tipos diferentes y los  ingredientes de un tipo concreto
-   VD<string> tipos=all_ingre.getTipos();
+   vector<string> tipos=all_ingre.getTipos();
    cout<<"Los tipos de alimentos son:"<<endl;
    for (int i=0;i<tipos.size(); ++i){
       cout<<tipos[i]<<endl;
@@ -109,4 +107,25 @@ int main(int argc, char *argv[])
    string tipo="Molusco";
    ingredientes ingre_tipo=all_ingre.getIngredienteTipo(tipo);
    cout<<"Los ingredientes de tipo "<<tipo<<" son: "<<endl<<ingre_tipo<<endl;
+   
+   /******************************************************************************************/
+   //SECTION 6: Probamos el iterador de ingredientes
+   cout<<endl<<"Impresión de los datos con el iterador"<<endl;
+   cout<<endl<<"Pulsa una tecla"<<endl;
+   cin.get();
+   ingredientes::iterator it;
+   for (it=all_ingre.begin();it!=all_ingre.end();++it){
+	   cout<<*it;
+   }
+   cout<<"Ahora imprimimos al contrario"<<endl;
+   cin.get();
+   it=all_ingre.end();
+   if(all_ingre.begin()!=all_ingre.end()){
+     do{
+	   --it;
+	   cout<<*it;
+	 
+     }while(it!=all_ingre.begin());
+   }
+
 }
