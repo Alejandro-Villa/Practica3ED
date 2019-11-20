@@ -7,24 +7,24 @@
 #ifndef INGREDIENTES
 #define INGREDIENTES
 
-#include "VD.h"
 #include "ingrediente.h"
 #include <iostream>
 #include <string>
+#include <vector>
 /**
  * @brief Clase que representa un conjunto de ingredientes.
  *
  * Esta clase representa un conjunto de ingredientes valiéndose de dos vectores dinámicos
- * de la clase @c VD. Los ingredientes se mantienen ordenados por nombre y por 
+ * de la clase @c vector. Los ingredientes se mantienen ordenados por nombre y por 
  * tipo, usando para la ordenación por tipo un vector de índices que apunta al vector de 
- * ingrediente. @see VD
+ * ingrediente. @see vector
  */
 class ingredientes {
 	public:
 		/**
 		 * @brief Constructor por defecto.
 		 *
-		 * Utiliza los constructores que provee @c VD para inicializar los datos miembro.
+		 * Utiliza los constructores que provee @c vector para inicializar los datos miembro.
 		 */
 		ingredientes();
 		/**
@@ -64,7 +64,7 @@ class ingredientes {
 		/**
 		 * @brief Devuelve la cantidad de ingredientes.
 		 *
-		 * Este método es una llamada a @c datos.size() (método @c VD::size()) que nos 
+		 * Este método es una llamada a @c datos.size() (método @c vector::size()) que nos 
 		 * devuelve el tamaño de @a datos. Dado que siempre @a datos e @a indice son del 
 		 * mismo tamaño, este valor es el número efectivo de ingredientes que contiene el
 		 * vector.
@@ -100,13 +100,13 @@ class ingredientes {
 		 * @brief Devuelve todos los tipos de ingredientes.
 		 *
 		 * Este método devuelve todos los tipos de ingredientes que existen en el objeto
-		 * en el momento de llamar al método. Los devuelve en un objeto de tipo @c VD
+		 * en el momento de llamar al método. Los devuelve en un objeto de tipo @c vector
 		 *
-		 * @retval "VD<std::string>" Vector dinámico conteniendo todos los tipos, sin 
+		 * @retval "vector<std::string>" Vector dinámico conteniendo todos los tipos, sin 
 		 * repetirse ninguno, en orden alfabético. De no haber ningún tipo devuelve un 
 		 * vector vacío.
 		 */
-		VD<std::string> getTipos() const;
+		std::vector<std::string> getTipos() const;
 		/**
 		 * @brief Devuelve todos los ingredientes del mismo tipo.
 		 *
@@ -131,6 +131,37 @@ class ingredientes {
 		 * @param "unsigned pos" La posición a la que se va a acceder.
 		 * @retval "const ingrediente& " Ingrediente en la posición @a pos.
 		 */
+		class iterator {
+			private:
+				std::vector<ingrediente>::iterator it;
+			public:
+				iterator(const std::vector<ingrediente>::iterator& origen) : it(origen) {};
+				iterator(const ingredientes::iterator& origen) : it(origen.it) {};
+				iterator& operator++() {++it; return *this;};
+				iterator& operator--() {--it; return *this;};
+				bool operator==(const ingredientes::iterator& rhs) const {return it == rhs.it;};
+				bool operator!=(const ingredientes::iterator& rhs) const {return it != rhs.it;};
+				ingrediente& operator*() {return *it;};
+
+		};
+		class const_iterator {
+			private:
+				std::vector<ingrediente>::const_iterator it;
+			public:
+				const_iterator(const std::vector<ingrediente>::const_iterator& origen) : it(origen) {};
+				const_iterator(const ingredientes::const_iterator& origen) : it(origen.it) {};
+				const_iterator& operator++() {++it; return *this;};
+				const_iterator& operator--() {--it; return *this;};
+				bool operator==(const ingredientes::const_iterator& rhs) const {return it == rhs.it;};
+				bool operator!=(const ingredientes::const_iterator& rhs) const {return it != rhs.it;};
+				const ingrediente& operator*() {return *it;};
+		};
+
+		iterator begin();
+		iterator end();
+		const_iterator begin() const;
+		const_iterator end() const;
+
 		inline const ingrediente& operator[](const unsigned pos) const {return datos[pos];};
 		/**
 		 * @brief operador[] no constante.
@@ -189,7 +220,7 @@ class ingredientes {
 		 * Los ingredientes que contiene se encuentran ordenados por orden alfabético de
 		 * nombre, y se mantienen así en todo momento.
 		 */
-		VD <ingrediente> datos;
+		std::vector<ingrediente> datos;
 		/**
 		 * @brief Vector auxiliar de índices.
 		 *
@@ -199,7 +230,7 @@ class ingredientes {
 		 * @a indice, se obtiene la ordenación Alfabética por Tipo, y a igualdad de tipo,
 		 * por nombre.
 		 */
-		VD <int> indice;
+		std::vector<int> indice;
 		/**
 		 * @brief Método para hallar la posición de un ingrediente en @a datos.
 		 *

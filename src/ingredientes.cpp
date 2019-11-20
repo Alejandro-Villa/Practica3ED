@@ -2,11 +2,11 @@
  * @file ingredientes.cpp
  * @brief Implementación de la clase @c ingredientes::ingredientes.
  */
-#include "VD.h"
 #include "ingredientes.h"
 #include "ingrediente.h"
 #include <iostream>
 #include <string>
+#include <vector>
 /**
  * @brief Directiva de preprocesamiento para depuración.
  *
@@ -18,18 +18,35 @@
 
 using namespace std;
 
+ingredientes::iterator ingredientes::begin() {
+	return ingredientes::iterator(datos.begin());
+}
+
+ingredientes::iterator ingredientes::end() {
+	return ingredientes::iterator(datos.end());
+}
+
+ingredientes::const_iterator ingredientes::begin() const {
+	return ingredientes::const_iterator(datos.cbegin());
+}
+
+ingredientes::const_iterator ingredientes::end() const {
+	return ingredientes::const_iterator(datos.cend());
+}
+
 ingredientes::ingredientes() {
-	// No es necesario, pues el constructor de VD ya asigna el puntero a nullptr. 
+	// No es necesario, pues el constructor de vector ya asigna el puntero a nullptr. 
 }
 
 ingredientes::ingredientes(const ingredientes& original) {
-	datos.resize(original.size());
-	indice.resize(original.size());
-	
+	datos = original.datos;
+	indice = original.indice;	
+	/*	
 	for (unsigned i=0; i < size(); ++i){
 		datos[i] = original.datos[i];
 		indice[i] = original.indice[i];
 	}
+	*/
 }
 
 unsigned ingredientes::size() const {
@@ -138,11 +155,15 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 }
 
 ostream& operator<< (ostream &out, const ingredientes &is) {
+	for (auto i = is.begin(); i != is.end(); ++i) 
+		out << *i;
+	/*
 	for (unsigned i = 0; i < is.datos.size(); ++i) {
 		if(DEBUG)
 			out << endl << "DEBUG:Ingrediente " << i << ":" << endl;
 		out << is.datos[i];
 	}
+	*/
 	return out;
 }
 
@@ -169,10 +190,8 @@ istream& operator>> (istream &in, ingredientes &is) {
 }
 
 ostream& ingredientes::ImprimirPorTipo(ostream& out) const {
-	for (unsigned i=0; i < size(); ++i) {
-		if(DEBUG)
-			cout << endl << "DEBUG: Ingrediente " << i << ':' << endl;
-		out << datos[indice[i]];
+	for (auto i=indice.begin(); i != indice.end(); ++i) {
+		out << datos[*i];
 	}
 	return out;
 }
@@ -180,10 +199,15 @@ ostream& ingredientes::ImprimirPorTipo(ostream& out) const {
 ingredientes ingredientes::getIngredienteTipo(string tipo) const {
 	ingredientes resultado;
 
+	for (auto i = begin(); i != end(); ++i) {
+		if((*i).getTipo() == tipo)
+			resultado.insertar((*i));
+	}
+	/*
 	for(unsigned i=0; i < size(); ++i)
 		if(datos[i].getTipo() == tipo)
 			resultado.insertar(datos[i]);
-
+	*/
 	return resultado;
 }
 
@@ -202,8 +226,8 @@ ingrediente ingredientes::get(string nombre) const {
 	return resultado;
 }
 
-VD<string> ingredientes::getTipos() const {
-	VD<string> totalTipos;
+vector<string> ingredientes::getTipos() const {
+	vector<string> totalTipos;
 	
 	for (unsigned i=0; i < size(); ++i) {
 		string tipo = datos[indice[i]].getTipo();
@@ -217,7 +241,7 @@ VD<string> ingredientes::getTipos() const {
 		if(!repetido) {
 			if(DEBUG)
 				cout << "DEBUG:Añadiendo tipo " << tipo << endl;
-			totalTipos.add(tipo);
+			totalTipos.push_back(tipo);
 		}
 	}
 
