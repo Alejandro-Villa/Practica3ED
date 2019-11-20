@@ -10,7 +10,7 @@ CXX = g++
 WARN = -Wall -Wpedantic -Wextra # Añadir si se quieren warnings detalladas
 								# Nota: una de ellas salta en test_ingredientes debido a mi elección de valores de retorno del metodo size().
 CPPFLAGS = -g -I$(INC) -c --std=c++11 
-all:$(BIN)/test_ingredientes $(BIN)/tipos_ingredientes
+all:$(BIN)/test_ingredientes # $(BIN)/tipos_ingredientes
 
 # ************ Generación de documentación ******************
 documentacion:
@@ -22,14 +22,14 @@ documentacion:
 $(BIN)/test_ingredientes: $(OBJ)/test_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
 	$(CXX) -o $(BIN)/test_ingredientes $(OBJ)/test_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o 
 
-$(BIN)/tipos_ingredientes: $(OBJ)/tipos_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
-	$(CXX) -o $(BIN)/tipos_ingredientes $(OBJ)/tipos_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
+#$(BIN)/tipos_ingredientes: $(OBJ)/tipos_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
+# 	$(CXX) -o $(BIN)/tipos_ingredientes $(OBJ)/tipos_ingredientes.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
 
 $(OBJ)/test_ingredientes.o: $(SRC)/test_ingredientes.cpp $(INC)/ingrediente.h $(INC)/ingredientes.h
 	$(CXX) $(CPPFLAGS) $(SRC)/test_ingredientes.cpp -o $(OBJ)/test_ingredientes.o 
 
-$(OBJ)/tipos_ingredientes.o: $(SRC)/tipos_ingredientes.cpp $(INC)/ingrediente.h $(INC)/ingredientes.h
-	$(CXX) $(CPPFLAGS) $(SRC)/tipos_ingredientes.cpp -o $(OBJ)/tipos_ingredientes.o 
+#$(OBJ)/tipos_ingredientes.o: $(SRC)/tipos_ingredientes.cpp $(INC)/ingrediente.h $(INC)/ingredientes.h
+#	$(CXX) $(CPPFLAGS) $(SRC)/tipos_ingredientes.cpp -o $(OBJ)/tipos_ingredientes.o 
 
 $(OBJ)/ingredientes.o: $(SRC)/ingredientes.cpp $(INC)/ingredientes.h $(INC)/ingrediente.h
 	$(CXX) $(CPPFLAGS) $(SRC)/ingredientes.cpp -o  $(OBJ)/ingredientes.o 	
