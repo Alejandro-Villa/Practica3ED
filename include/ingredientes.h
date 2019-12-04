@@ -136,7 +136,7 @@ class ingredientes {
 				 *
 				 * Inicializa @a ita @a datos.begin()
 				 */
-				iterator() :it(datos.begin()) {};
+				iterator() {};
 				/**
 				 * @brief Constructor de iterador.
 				 *
