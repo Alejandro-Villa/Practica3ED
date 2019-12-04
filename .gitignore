@@ -5,3 +5,4 @@ doc/html
 html/*
 latex/*
 *.tgz
+src/test_ingredientes.cpp
