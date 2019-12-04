@@ -132,6 +132,12 @@ class ingredientes {
 				std::vector<ingrediente>::iterator it;
 			public:
 				/**
+				 * @brief Constructor por defecto.
+				 *
+				 * Inicializa @a ita @a datos.begin()
+				 */
+				iterator() :it(datos.begin()) {};
+				/**
 				 * @brief Constructor de iterador.
 				 *
 				 * Este constructor toma como parámetro un iterador de STL vector.
