@@ -35,7 +35,6 @@ class ingredientes {
 		 * @param "const ingredientes& original" Ingrediente que se copiará.
 		 */
 		ingredientes(const ingredientes& original);
-		
 		/**
 		 * @brief Inserta un nuevo ingrediente.
 		 *
@@ -119,29 +118,108 @@ class ingredientes {
 		 */
 		ingredientes getIngredienteTipo(std::string tipo) const;
 		/**
-		 * @brief operador[] constante.
+		 * @brief Clase Iterador.
 		 *
-		 * Este método devuelve el ingrediente en la posición @a pos, en el vector 
-		 * @a datos. En caso de ser un índice inválido aborta el programa. El método 
-		 * está implementado como inline para mejorar el rendimiento, ya que se prevee 
-		 * que será llamado muchas veces.
-		 *
-		 * @pre @a pos debe ser un índice válido, esto es, positivo y menor que 
-		 * @c size().
-		 * @param "unsigned pos" La posición a la que se va a acceder.
-		 * @retval "const ingrediente& " Ingrediente en la posición @a pos.
+		 * Esta clase implementa un iterador para ingredientes, 
+		 * usando como base el iterator de la clase STL vector. 
+		 * Concretamente usa el iterator de datos.
 		 */
 		class iterator {
 			private:
+				/**
+				 * @brief Iterator de la Standard Template Library.
+				 */
 				std::vector<ingrediente>::iterator it;
 			public:
+				/**
+				 * @brief Constructor de iterador.
+				 *
+				 * Este constructor toma como parámetro un iterador de STL vector.
+				 *
+				 * @param "const std::vector<ingredientes>::iterator& origen" El iterador que va a copiarse en @a it
+				 * @post Ahora @a it está inicializado.
+				 */
 				iterator(const std::vector<ingrediente>::iterator& origen) : it(origen) {};
+				/**
+				 * @brief Constructor de copia.
+				 *
+				 * Toma como parámetro otro objeto de iterador y lo copia en @a this.
+				 *
+				 * @param "const ingredientes::iterator& origen" El objeto que se copiará.
+				 * @post @a this y @a origen son iguales.
+				 */
 				iterator(const ingredientes::iterator& origen) : it(origen.it) {};
+				/**
+				 * @brief Operador de pre-incremento.
+				 *
+				 * Este operador incrementa el iterador para que apunte al siguiente elemento de @a datos.
+				 *
+				 * @post @a it ahora apunta a la siguiente posición de @a datos.
+				 * @retval iterator& referencia a @a this.
+				 */
 				iterator& operator++() {++it; return *this;};
+				/**
+				 * @brief Operador de decremento.
+				 *
+				 * Este operador decrementa el iterador para que apunte al anterior elemento de @a datos.
+				 *
+				 * @post @a it ahora apunta a la anterior posición de @a datos.
+				 * @retval iterator& referencia a @a this.
+				 */
 				iterator& operator--() {--it; return *this;};
+				/**
+				 * @brief operador de comparación booleana (igualdad)
+				 *
+				 * Este operador compara si @a this y @a rhs apuntan al mismo elemento.
+				 * Devuelve @a True si es así, @a False en otro caso.
+				 *
+				 * @param "const ingredientes::iterator& rhs" El iterador con el que vamos a comparar. 
+				 * @retval bool @a True si son iguales, @a False en otro caso.
+				 */
 				bool operator==(const ingredientes::iterator& rhs) const {return it == rhs.it;};
+				/**
+				 * @brief operador de comparación booleana (desigualdad)
+				 *
+				 * Este operador compara si @a this y @a rhs apuntan a distinto elemento.
+				 * Devuelve @a True si es así, @a False en otro caso.
+				 *
+				 * @param "const ingredientes::iterator& rhs" El iterador con el que vamos a comparar. 
+				 * @retval bool @a True si son distintos, @a False en otro caso.
+				 */
 				bool operator!=(const ingredientes::iterator& rhs) const {return it != rhs.it;};
-				ingrediente& operator*() {return *it;};
+				/**
+				 * @brief Operador de acceso.
+				 *
+				 * Devuelve el elemento al que apunta @a it.
+				 *
+				 * @retval ingrediente& El elemento de @a datos al que apunta @it.
+				 * @post No se altera @a it ni @a datos.
+				 */
+				ingrediente& operator*() const {return *it;};
+				/**
+				 * @brief Operador de suma con enteros.
+				 *
+				 * Hace que el iterador apunte @a num posiciones adelante.
+				 *
+				 * @param "const int& num" Número de posiciones a adelantar.
+				 * @retval iterator& el iterador modificado.
+				 */ 
+				iterator& operator+(const int& num) {it += num; return *this;};
+				/**
+				 * @brief Operador de distancia.
+				 *
+				 * Devuelve la distancia entre dos objetos de @a iterator.
+				 *
+				 * @param "const ingredientes::iterator& otro" otro iterator para calcular la distancia.
+				 * @retval int La distancia entre los iteradores
+				 */
+				int operator-(const ingredientes::iterator& otro) { return it - otro.it; };
+				/**
+				 * @brief Getter de @a it.
+				 *
+				 * @retval "const std::vector<ingrediente>::iterator" Devuelve @a it.
+				 */
+				inline const std::vector<ingrediente>::iterator getIterator() const {return it;};
 
 		};
 		class const_iterator {
@@ -155,13 +233,26 @@ class ingredientes {
 				bool operator==(const ingredientes::const_iterator& rhs) const {return it == rhs.it;};
 				bool operator!=(const ingredientes::const_iterator& rhs) const {return it != rhs.it;};
 				const ingrediente& operator*() {return *it;};
+				inline const std::vector<ingrediente>::const_iterator getIterator() const {return it;};
 		};
 
 		iterator begin();
 		iterator end();
 		const_iterator begin() const;
 		const_iterator end() const;
-
+		/**
+		 * @brief operador[] constante.
+		 *
+		 * Este método devuelve el ingrediente en la posición @a pos, en el vector 
+		 * @a datos. En caso de ser un índice inválido aborta el programa. El método 
+		 * está implementado como inline para mejorar el rendimiento, ya que se prevee 
+		 * que será llamado muchas veces.
+		 *
+		 * @pre @a pos debe ser un índice válido, esto es, positivo y menor que 
+		 * @c size().
+		 * @param "unsigned pos" La posición a la que se va a acceder.
+		 * @retval "const ingrediente& " Ingrediente en la posición @a pos.
+		 */
 		inline const ingrediente& operator[](const unsigned pos) const {return datos[pos];};
 		/**
 		 * @brief operador[] no constante.
@@ -210,6 +301,8 @@ class ingredientes {
 		 * 
 		 */
 		friend std::istream& operator>> (std::istream& in, ingredientes& is);
+		friend bool comparaNombre(const ingrediente& primero, const ingrediente& segundo);
+		//friend bool comparaTipo(const ingrediente& primero, const ingrediente& segundo);
 	private:
 		/**
 		 * @brief Vector que almacena los ingredientes.
@@ -245,7 +338,8 @@ class ingredientes {
 		 * será @c false.
 		 * @retval unsigned Posición del ingrediente, o la que debería tener. 
 		 */
-		unsigned existeDatos(const ingrediente& buscado, bool &encontrado) const;
+		//unsigned existeDatos(const ingrediente& buscado, bool &encontrado) const;
+		iterator existeDatos(const ingrediente& buscado, bool &encontrado) const;
 		/**
 		 * @brief Método para hallar la posición de un ingrediente en @a indice.
 		 *
@@ -258,7 +352,8 @@ class ingredientes {
 		 * @param "const ingrediente& buscado" Ingrediente a encontrar.
 		 * @retval unsigned Posición donde se encuentra o donde debería.
 		 */
-		unsigned existeIndice(const ingrediente& buscado) const;
+		//unsigned existeIndice(const ingrediente& buscado) const;
+		iterator existeIndice(const ingrediente& buscado) const;
 };
 
 #endif
