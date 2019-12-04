@@ -168,7 +168,6 @@ class ingrediente {
 		 * flujo. Para convertir las cadenas a @c double usamos @c atof() y @c c_str().
 		 */
 		friend std::istream& operator>>( std::istream & in, ingrediente & I);
-		
 	private:
 		/**
 		 * @brief Nombre del ingrediente.
