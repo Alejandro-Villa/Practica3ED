@@ -64,6 +64,11 @@ bool comparaNombre(const ingrediente& primero, const ingrediente& segundo) {
 
 void ingredientes::insertar(const ingrediente& nuevo) {
 	if(size() > 0) {
+		if (nuevo.getNombre() > datos.back().getNombre()) {
+			datos.push_back(nuevo);
+			indice.push_back(indice.size());
+		}
+		else {
 		iterator pos(lower_bound(datos.begin(), datos.end(), nuevo, comparaNombre));
 	
 		if( !((*pos).getNombre() == nuevo.getNombre()) ) {
@@ -73,6 +78,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 					++(*it);
 
 			datos.insert(pos.getIterator(), nuevo);
+
             auto comparaTipo = [&](int uno, const ingrediente& otro) {
 				if(datos[uno].getTipo() < otro.getTipo())
 					return true;
@@ -81,12 +87,16 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 				else
 					return false;
 			};
+
 			vector<int>::iterator indicepos = lower_bound(indice.begin(), indice.end(), nuevo, comparaTipo);
 			indice.insert(indicepos, posicion);
+			}
 		}
 	}
-	else 
+	else { 
 		datos.push_back(nuevo);
+		indice.push_back(0);
+	}
 }
 /*
 unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado) const {
