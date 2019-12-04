@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 /**
  * @brief Directiva de preprocesamiento para depuración.
  *
@@ -52,7 +53,42 @@ ingredientes::ingredientes(const ingredientes& original) {
 unsigned ingredientes::size() const {
 	return datos.size();
 }
+ingredientes::iterator ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado) const {
+	encontrado = false;
 
+}
+
+bool comparaNombre(const ingrediente& primero, const ingrediente& segundo) {
+	return primero.getNombre() < segundo.getNombre();
+}
+
+void ingredientes::insertar(const ingrediente& nuevo) {
+	if(size() > 0) {
+		iterator pos(lower_bound(datos.begin(), datos.end(), nuevo, comparaNombre));
+	
+		if( !((*pos).getNombre() == nuevo.getNombre()) ) {
+			int posicion = pos - begin();
+			for(auto it = indice.begin(); it != indice.end(); ++it)
+				if(*it >= posicion)
+					++(*it);
+
+			datos.insert(pos.getIterator(), nuevo);
+            auto comparaTipo = [&](int uno, const ingrediente& otro) {
+				if(datos[uno].getTipo() < otro.getTipo())
+					return true;
+				else if (datos[uno].getTipo() == otro.getTipo())
+					return datos[uno].getNombre() < otro.getNombre();
+				else
+					return false;
+			};
+			vector<int>::iterator indicepos = lower_bound(indice.begin(), indice.end(), nuevo, comparaTipo);
+			indice.insert(indicepos, posicion);
+		}
+	}
+	else 
+		datos.push_back(nuevo);
+}
+/*
 unsigned ingredientes::existeDatos(const ingrediente& buscado, bool &encontrado) const {
 	encontrado = false;
 	unsigned lo=0, hi=(size()>0)?size()-1:0 ,mid=0;
@@ -119,7 +155,7 @@ unsigned ingredientes::existeIndice(const ingrediente& buscado) const {
 	}
 		return lo; // Devolvemos la posición donde lo encontramos.
 }
-
+*//*
 void ingredientes::insertar(const ingrediente& nuevo) {
 	bool esta = false;
 	unsigned dpos = existeDatos(nuevo, esta);
@@ -153,7 +189,7 @@ void ingredientes::insertar(const ingrediente& nuevo) {
 	else 
 		cout << "Ya está" << endl;
 }
-
+*/
 ostream& operator<< (ostream &out, const ingredientes &is) {
 	for (auto i = is.begin(); i != is.end(); ++i) 
 		out << *i;
@@ -229,6 +265,18 @@ ingrediente ingredientes::get(string nombre) const {
 vector<string> ingredientes::getTipos() const {
 	vector<string> totalTipos;
 	
+	for (auto i = indice.begin(); i != indice.end(); ++i) {
+		string tipo = datos[(*i)].getTipo();
+		bool repetido = false;
+		for (auto j = totalTipos.begin(); j != totalTipos.end(); ++j)
+			if(*j == tipo) {
+				repetido = true;
+				break;
+			}
+		if(!repetido)
+			totalTipos.push_back(tipo);
+	}
+	/*
 	for (unsigned i=0; i < size(); ++i) {
 		string tipo = datos[indice[i]].getTipo();
 		unsigned j = 0;
@@ -244,11 +292,12 @@ vector<string> ingredientes::getTipos() const {
 			totalTipos.push_back(tipo);
 		}
 	}
-
+*/
 	return totalTipos;
 }
 
 void ingredientes::borrar(string nombre) {
+	/*
 	ingrediente borrado(get(nombre));
 	
 	if (borrado.getNombre() != "Undefined") {
@@ -275,5 +324,5 @@ void ingredientes::borrar(string nombre) {
 		for (unsigned i=0; i < indice.size(); ++i)
 			if ((unsigned)indice[i] >= dpos)
 				--indice[i];
-	}
+	}*/
 }
