@@ -17,11 +17,26 @@ void recetas::addReceta(const receta& nueva) {
 		res	= datos.insert(nelem);
 }
 
-void recetas::borrar(string codigo) {
+void recetas::borrar(const string codigo) {
 	unsigned borrados = datos.erase(codigo);
 }
 
-receta recetas::operator[](string codigo) {
+void recetas::setNutrientes(const ingredientes& ings) {
+	for (auto i=begin(); i != end(); ++i) {
+		for (auto j=(*i).begin(); j != (*i).end(); ++j) {
+			ingrediente ing = ings.get((*j).first); 
+			double num = (*j).second / (double)100;
+
+			(*i).setCalorias(((*i).getCalorias() + (num * ing.getCalorias())));
+			(*i).setHc(((*i).getHc() + (num * ing.getHc())));
+			(*i).setGrasas(((*i).getGrasas() + (num * ing.getGrasas())));
+			(*i).setProteinas(((*i).getProteinas() + (num * ing.getProteinas())));
+			(*i).setFibra(((*i).getFibra() + (num * ing.getFibra())));
+		}
+	}
+}
+
+receta recetas::operator[](const string& codigo) {
 	receta res;
 	iterator ite(datos.find(codigo));
 	
@@ -31,7 +46,7 @@ receta recetas::operator[](string codigo) {
 	return res;
 }
 
-const receta recetas::operator[](string codigo) const {
+const receta recetas::operator[](const string& codigo) const {
 	receta res;
 	const_iterator ite(datos.find(codigo));
 	

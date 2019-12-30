@@ -53,6 +53,18 @@ receta::const_iterator receta::end() const {
 	return ite;
 }
 
+receta& receta::operator=(const receta& rhs) {
+	code = rhs.code;
+	plato = rhs.plato;
+	nombre = rhs.nombre;
+	ings = rhs.ings;
+	calorias = rhs.calorias;
+	hc = rhs.hc;
+	grasas = rhs.grasas;
+	proteinas = rhs.proteinas;
+	fibra = rhs.fibra;
+}
+
 ostream& operator<<(ostream& out, const receta& r) {
 	char sep = ';';
 	out << r.code << sep << r.plato << sep << r.nombre << sep;

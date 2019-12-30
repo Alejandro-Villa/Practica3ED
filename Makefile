@@ -24,8 +24,8 @@ $(BIN)/test_ingredientes: $(OBJ)/test_ingredientes.o $(OBJ)/ingredientes.o $(OBJ
 $(BIN)/test_receta: $(OBJ)/test_receta.o $(OBJ)/ingrediente.o $(OBJ)/ingredientes.o $(OBJ)/receta.o $(OBJ)/recetas.o
 	$(CXX) -o $(BIN)/test_receta $(OBJ)/test_receta.o $(OBJ)/ingrediente.o $(OBJ)/ingredientes.o $(OBJ)/receta.o $(OBJ)/recetas.o
 
-$(BIN)/nutricion_receta: $(OBJ)/nutricion_receta.o $(OBJ)/receta.o $(OBJ)/recetas.o
-	$(CXX) -o $(BIN)/nutricion_receta $(OBJ)/nutricion_receta.o $(OBJ)/receta.o $(OBJ)/recetas.o
+$(BIN)/nutricion_receta: $(OBJ)/nutricion_receta.o $(OBJ)/receta.o $(OBJ)/recetas.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
+	$(CXX) -o $(BIN)/nutricion_receta $(OBJ)/nutricion_receta.o $(OBJ)/receta.o $(OBJ)/recetas.o $(OBJ)/ingredientes.o $(OBJ)/ingrediente.o
 
 $(OBJ)/test_ingredientes.o: $(SRC)/test_ingredientes.cpp $(INC)/ingrediente.h $(INC)/ingredientes.h
 	$(CXX) $(CPPFLAGS) $(SRC)/test_ingredientes.cpp -o $(OBJ)/test_ingredientes.o 
@@ -58,8 +58,8 @@ mrproper : clean
 
 # ************ Entrega *************
 entrega: all mrproper
-	-rm -f practica2.tgz
-	tar -czvf practica2.tgz \
+	-rm -f practica3.tgz
+	tar -czvf practica3.tgz \
 		--exclude-vcs --exclude-vcs-ignores --exclude='datos/*' \
-		--exclude='README.md' --exclude='practica2.tgz' \
+		--exclude='README.md' --exclude='practica3.tgz' \
 		../`basename $(PWD)` 
